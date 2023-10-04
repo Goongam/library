@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>도서관 관리 시스템</title>
+  </head>
+  <body>
+    <h1>도서관 관리 시스템</h1>
+
+    <h2>멤버 정보</h2>
+    <form method="POST" action="/add_member">
+      <label for="member_name">이름:</label>
+      <input type="text" name="member_name" required />
+      <label for="member_phone">전화번호:</label>
+      <input type="text" name="member_phone" required />
+      <input type="submit" value="추가" />
+    </form>
+
+    <form method="POST" action="/delete_member">
+      <label for="member_name">멤버 삭제:</label>
+      <select name="member_name" required>
+        {% for member in members %}
+        <option value="{{ member }}">{{ member }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="삭제" />
+    </form>
+
+    <h2>책 정보</h2>
+    <form method="POST" action="/add_book">
+      <label for="book_title">책 추가:</label>
+      <input type="text" name="book_title" required />
+      <input type="submit" value="추가" />
+    </form>
+
+    <form method="POST" action="/delete_book">
+      <label for="book_title">책 삭제:</label>
+      <select name="book_title" required>
+        {% for book, status in books.items() %}
+        <option value="{{ book }}">{{ book }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="삭제" />
+    </form>
+
+    <h2>책 대출/반납</h2>
+    <form method="POST" action="/borrow_book">
+      <label for="member_name">멤버:</label>
+      <select name="member_name" required>
+        {% for member in members %}
+        <option value="{{ member }}">{{ member }}</option>
+        {% endfor %}
+      </select>
+      <label for="book_title">책:</label>
+      <select name="book_title" required>
+        {% for book, status in books.items() if status == 'Available' %}
+        <option value="{{ book }}">{{ book }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="대출" />
+    </form>
+
+    <form method="POST" action="/return_book">
+      <label for="member_name">멤버:</label>
+      <select name="member_name" required>
+        {% for member in members %}
+        <option value="{{ member }}">{{ member }}</option>
+        {% endfor %}
+      </select>
+      <label for="book_title">책:</label>
+      <select name="book_title" required>
+        {% for book, status in books.items() if status == 'Borrowed' %}
+        <option value="{{ book }}">{{ book }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="반납" />
+    </form>
+
+    <!-- 멤버 정보 및 책 상태 정보 목록 -->
+    <h2>멤버 정보</h2>
+    <ul>
+      {% for member, info in members.items() %}
+      <li>{{ member }} (전화번호: {{ info['phone'] }})</li>
+      {% endfor %}
+    </ul>
+
+    <h2>책 상태 정보</h2>
+    <ul>
+      {% for book, status in books.items() %}
+      <li>{{ book }} (상태: {{ status }})</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
