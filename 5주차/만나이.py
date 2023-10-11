@@ -16,3 +16,4 @@ age = current_date.year - birth_date.year - ((current_date.month, current_date.d
 
 # 결과 출력
 print("당신은 현재", age, "세 입니다.")
+#ㅇㅇ
