@@ -39,4 +39,4 @@ while True:
         elif choice == '4':
             print("결과: ", divide(num1, num2))
     else:
-        print("올바른 옵션을 선택하세요.")
+        print("잘못된 옵션입니다. 다시선택하세요")
