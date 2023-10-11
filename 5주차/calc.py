@@ -40,3 +40,4 @@ while True:
             print("결과: ", divide(num1, num2))
     else:
         print("잘못된 옵션입니다. 다시선택하세요")
+        #수정
